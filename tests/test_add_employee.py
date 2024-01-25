@@ -14,7 +14,7 @@ def logout(request):
 @pytest.fixture()
 def cleanup(request):
     fixture = Application(10)
-    request.addfinalizer(app.cleanup)
+    request.addfinalizer(app.employee_cleanup)
     return fixture
 
 

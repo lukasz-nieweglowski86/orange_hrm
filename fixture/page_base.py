@@ -6,13 +6,16 @@ import repo.orange_hrm.pages.header as header
 import repo.orange_hrm.pages.login_page as login_page
 import repo.orange_hrm.pages.dashboard_page as dashboard_page
 import repo.orange_hrm.pages.password_reset_page as pwd_reset_page
-import repo.orange_hrm.pages.PIM_tab.add_employee_page as add_employee_page
+import repo.orange_hrm.pages.PIM_tab.add_employee_tab.add_employee_page as add_employee_page
 import repo.orange_hrm.pages.password_reset_confirmation_page as pwd_confirmed_reset_page
-import repo.orange_hrm.pages.PIM_tab.employee_list_page as employee_list_page
+import repo.orange_hrm.pages.PIM_tab.employee_list_tab.employee_list_page as employee_list_page
 import repo.orange_hrm.pages.PIM_tab.employee_tab.personal_details_page as personal_details_page
+import repo.orange_hrm.pages.PIM_tab.configuration_tab.custom_fields.custom_fields_page as custom_fields_page
+import repo.orange_hrm.pages.PIM_tab.configuration_tab.custom_fields.add_custom_field_page as add_custom_field_page
 import repo.orange_hrm.data.login_page as login_data
 import repo.orange_hrm.data.password_reset_page as pwd_reset_data
 import repo.orange_hrm.data.PIM_tab.add_employee_page as add_employee_data
+import repo.orange_hrm.data.PIM_tab.add_custom_field_page as add_custom_field_data
 
 
 class PageBase:
@@ -24,7 +27,9 @@ class PageBase:
     }
 
     def __init__(self, wait):
-        self.wd = webdriver.Chrome()
+        self.options = webdriver.ChromeOptions()
+        self.options.add_experimental_option("detach", False)
+        self.wd = webdriver.Chrome(options=self.options)
         self.wd.maximize_window()
         self.wait = wait
         self.header = header
@@ -35,9 +40,12 @@ class PageBase:
         self.add_employee_page = add_employee_page
         self.employee_list_page = employee_list_page
         self.personal_details_page = personal_details_page
+        self.custom_fields_page = custom_fields_page
+        self.add_custom_field_page = add_custom_field_page
         self.login_data = login_data
         self.pwd_reset_data = pwd_reset_data
         self.add_employee_data = add_employee_data
+        self.add_custom_field_data = add_custom_field_data
 
     def navigate_to_page(self, page_url):
         self.wd.get(page_url)
@@ -65,3 +73,7 @@ class PageBase:
 
     def click_link(self, locator_type, locator_value):
         self.click_element(self.types[locator_type], locator_value)
+
+    def select_option_from_dropdown(self, locator_type, locator_value, desired_option):
+        self.click_element(self.types[locator_type], locator_value)
+        self.click_element(self.types[locator_type], desired_option)

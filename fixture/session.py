@@ -1,4 +1,5 @@
 from repo.orange_hrm.fixture.page_base import PageBase
+import repo.orange_hrm.data.PIM_tab.add_custom_field_page as add_custom_field_data
 
 
 class SessionHelper(PageBase):
@@ -45,8 +46,21 @@ class SessionHelper(PageBase):
         else:
             pass
 
-    def cleanup(self):
+    def delete_custom_field(self, field_name):
+        self.navigate_to_page(self.custom_fields_page.page_url)
+        self.click_button('xpath', '//div[text()="{}"]/following::button[1]'.format(field_name))
+        self.click_button('xpath', self.custom_fields_page.buttons['removal_confirmation'])
+
+    def employee_cleanup(self):
         self.delete_employee('employee_id', self.add_employee_data.inputs['employee_id'])
+        self.logout_from_app()
+
+    def custom_field_cleanup(self, field_name=add_custom_field_data.inputs['field_name']):
+        self.delete_custom_field(field_name)
+        self.logout_from_app()
+
+    def edited_name_custom_field_cleanup(self, field_name=add_custom_field_data.inputs['edited_field_name']):
+        self.delete_custom_field(field_name)
         self.logout_from_app()
 
     def quit_session(self):
