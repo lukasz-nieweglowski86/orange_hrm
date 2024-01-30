@@ -1,1 +1,1 @@
-# orange_hrm
+# This repository presents positive and negative tests written using the Python programming language and the Selenium framework. The tested website is a demo version of human resources management software.

@@ -1,5 +1,5 @@
 import pytest
-from repo.orange_hrm.fixture.application import Application
+from repo.orange_hrm.methods.application import Application
 
 app = Application(10)
 

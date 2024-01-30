@@ -1,5 +1,5 @@
 from selenium.webdriver.common.keys import Keys
-from repo.orange_hrm.fixture.session import SessionHelper
+from repo.orange_hrm.methods.session import SessionHelper
 
 
 class Application(SessionHelper):

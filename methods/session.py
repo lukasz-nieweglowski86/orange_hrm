@@ -1,4 +1,4 @@
-from repo.orange_hrm.fixture.page_base import PageBase
+from repo.orange_hrm.methods.page_base import PageBase
 import repo.orange_hrm.data.PIM_tab.add_custom_field_page as add_custom_field_data
 
 
